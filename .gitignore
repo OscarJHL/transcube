@@ -1,0 +1,15 @@
+node_modules
+build
+dist
+*.psd
+temp
+*.pickle
+*.bak
+*.txt
+*.rar
+*.tmx
+*.tsx
+rules.txt
+*.sublime-workspace
+*.sublime-project
+tools
