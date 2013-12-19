@@ -36,7 +36,7 @@ var Assets = {
         }
 
         $('#leveltitle').text(this.completion != 100 ? "Loading.. " + this.completion + "% done!" : '');
-        console.info(path + ' loaded - Completion: %c' + this.completion + ' %', 'color: green; font-size: 14px;');
+        console.log(path + ' loaded - Completion: ' + this.completion + '/100');
 
     },
 

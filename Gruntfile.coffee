@@ -11,6 +11,10 @@ module.exports = (grunt) ->
                 files:
                     "./build/index.html": ["./dev/index.jade"]
             dist:
+                options:
+                    pretty: false
+                    data: 
+                        debug: false
                 files:
                     "./dist/index.html": ["./dev/index.jade"]
 
@@ -53,6 +57,8 @@ module.exports = (grunt) ->
             dist:
                 src: "./build/js/main.js"
                 dest: "./build/js/main-clean.js"
+                options:
+                    methods: ['log']
 
         copy: 
             build: 
@@ -89,9 +95,12 @@ module.exports = (grunt) ->
             dist: ["./dist/**/*", "!**/.git"]
 
         cleanlevel:
-            all:
+            build:
                 src: ["./dev/media/data/levels/*.json"]
                 dest: "./build/media/data/levels"
+            dist:
+                src: ["./dev/media/data/levels/*.json"]
+                dest: "./dist/media/data/levels"
 
         watch:
             build:
@@ -127,6 +136,6 @@ module.exports = (grunt) ->
     grunt.loadNpmTasks "grunt-remove-logging"
 
     grunt.loadTasks "./tasks"
-
-    grunt.registerTask "dist", ["clean:dist", "jade:dist", "less:dist", "browserify2:dist", "removelogging", "uglify", "copy:dist", "copy:dist_libs", "cleanlevel:all"]
-    grunt.registerTask "default", ["clean:build", "jade:build", "less:build", "browserify2:build", "copy:build", "copy:build_libs", "cleanlevel:all"]
+ 
+    grunt.registerTask "dist", ["clean:dist", "jade:dist", "less:dist", "browserify2:dist", "removelogging", "uglify", "copy:dist", "copy:dist_libs", "cleanlevel:dist"]
+    grunt.registerTask "default", ["clean:build", "jade:build", "less:build", "browserify2:build", "copy:build", "copy:build_libs", "cleanlevel:build"]
