@@ -82,7 +82,7 @@ var Engine = Class.extend({
         config.display.realheight = this.canvas.height;
 
         $('#ui').css('width', this.canvas.width);
-        var uh = $('#ui').css('height').replace('px', '');
+        var uh = $('#levelselect').actual('innerHeight');
         $('#ui').css('padding-top', ~~ (h / 2 - uh / 2));
         $('#canvas').css('left', ~~ (w / 2 - this.canvas.width / 2) + "px").css('top', ~~ (h / 2 - this.canvas.height / 2) + "px");
         config.message.top = ~~ (h / 2 - 50);

@@ -79,14 +79,14 @@ module.exports = (grunt) ->
                 files: [
                     expand: true
                     cwd: "./dev/js/lib/"
-                    src: ["./soundmanager2-nodebug-jsmin.js", "./jquery.color-2.1.2.min.js", "./jquery-1.10.1.min.js"]
+                    src: ["./soundmanager2-nodebug-jsmin.js", "./jquery.plugins.min.js", "./jquery-1.10.1.min.js"]
                     dest: "./build/js/"
                 ]
             dist_libs:
                 files: [
                     expand: true
                     cwd: "./dev/js/lib/"
-                    src: ["./soundmanager2-nodebug-jsmin.js", "./jquery.color-2.1.2.min.js", "./jquery-1.10.1.min.js"]
+                    src: ["./soundmanager2-nodebug-jsmin.js", "./jquery.plugins.min.js", "./jquery-1.10.1.min.js"]
                     dest: "./dist/js/"
                 ]
 
