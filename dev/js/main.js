@@ -45,5 +45,5 @@ $(document).bind("contextmenu", function(e) {
 
 
 $('#github').click(function() {
-    window.location = "https://github.com/jeroenverfallie/game-off-2013";
+    window.location = "https://github.com/jeroenverfallie/transcube";
 })

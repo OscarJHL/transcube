@@ -20,12 +20,25 @@ var Engine = Class.extend({
 
     init: function(gameConst) {
         this.initCanvas();
+        this.loadAssets();
         this.initSounds();
 
         p.initDebug(this.context, config.display.scale);
         p.dragNDrop(window);
 
         this.tick();
+    },
+
+    loadAssets: function() {
+        if (!this.game) {
+            Assets.loadAll(media);
+            Assets.onReady(function() {
+                if (!this.game) {
+                    this.game = new game(this.context);
+                }
+
+            }, this);
+        }
     },
 
     initSounds: function() {
@@ -75,22 +88,13 @@ var Engine = Class.extend({
         config.message.top = ~~ (h / 2 - 50);
 
 
-        if (!this.game) {
-            config.display.scale = s;
-            Assets.loadAll(media);
-            Assets.onReady(function() {
-                if (!this.game) {
-                    this.game = new game(this.context);
-                }
-
-            }, this);
-        }
-
         if (this.game && config.display.scale != s) {
             p.resizeDebug(s);
             config.display.scale = s;
             Assets.resizeAll();
         }
+
+        config.display.scale = s;
     },
 
     update: function() {

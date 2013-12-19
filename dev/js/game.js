@@ -111,7 +111,7 @@ var Game = Class.extend({
 
         $('#play').click(function() {
             showIntro(false);
-            showLevels(true);
+            showLevels(true, false);
             self.pauseGame(true);
         });
 
@@ -208,10 +208,18 @@ var Game = Class.extend({
             }
         }
 
-        function showLevels(show) {
+        function showLevels(show, showresume) {
             if (b) {
                 b.remove();
             }
+            if (showresume === undefined || showresume) {
+                $('.play').show();
+                $('.restart').show();
+            } else {
+                $('.play').hide();
+                $('.restart').hide();
+            }
+
             if (show === undefined || show) {
                 $('#levelselect').fadeIn();
             } else {
@@ -399,7 +407,7 @@ var Game = Class.extend({
             s = (parseInt(id) + 1) + ". ";
         }
         $('#leveltitle').text(s + level.title);
-        
+
         if (id == '0') this.level.setActiveMorph(2);
         this.pauseGame(false);
     },

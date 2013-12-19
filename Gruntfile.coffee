@@ -111,7 +111,7 @@ module.exports = (grunt) ->
 
             js:
                 files: ["./dev/js/**/*.js"]
-                tasks: ["browserify2", "copy:libs"]
+                tasks: ["browserify2:build", "copy:build_libs"]
 
             media: 
                 files: ["./dev/media/**/*"]
