@@ -146,29 +146,6 @@ var Laser = Entity.extend({
             w = -w;
         }
 
-        // if (x + w < 0 || x > rw || y + h < 0 || y > rh) return;
-
-        // if (x + w > rw - config.fog.area.x) {
-        //     w = (x + w - rw - config.fog.area.x)
-        // }
-
-        // if (y + h > rh - config.fog.area.y) {
-        //     h = (y + h - rh - config.fog.area.y)
-        // // }
-
-        // if (x < config.fog.area.x) {
-        //     t = config.fog.area.x - x;
-        //     x = config.fog.area.x;
-        //     w = w - t;
-        // }
-
-        // if (y < 0) {
-        //     t = config.fog.area.y - y;
-        //     y = config.fog.area.y;
-        //     h = h - t;
-        // }
-
-
         ctx.save();
         ctx.globalAlpha = this.alpha;
 
@@ -182,19 +159,6 @@ var Laser = Entity.extend({
         ctx.fillRect(x, y, (this.axis == "x" ? w : one), (this.axis == "y" ? h : one));
         ctx.fillStyle = 'rgba(0, 0, 0, 0.7)';   
         ctx.fillRect(x + (this.axis == "x" ? 0 : three), y + (this.axis == "y" ? 0 : three), (this.axis == "x" ? w : one), (this.axis == "y" ? h : one));
-        
-        // ctx.globalAlpha = 1;
-        // if(this.axis == "x") {
-        //     ctx.fillStyle = "#000000";
-        //     ctx.fillRect(x, y-one, two, h+two);
-        //     ctx.fillStyle = "#000000";
-        //     ctx.fillRect(x+w-two, y-one, two, h+two);
-        // } else {
-        //     ctx.fillStyle = "#000000";
-        //     ctx.fillRect(x-one, y, w+two, two);
-        //     ctx.fillStyle = "#000000";
-        //     ctx.fillRect(x-one, y+h-twodz, w+two, two);
-        // }
 
         ctx.restore();
     }

@@ -2,7 +2,6 @@ var PerspectiveLayer = require('./engine/perspective-layer');
 var CollisionLayer = require('./engine/collision-layer');
 var ImageLayer = require('./engine/image-layer');
 
-var Animation = require('./engine/animation');
 var config = require('./config');
 var Camera = require('./engine/camera');
 
@@ -106,7 +105,7 @@ var Level = Class.extend({
 
             var el = '#morphs > div #' + i;
             $(el + ' span').text(n);
-            $(el + ' figure').css('background-position', "-" + mo.bgpos.x + "px " + "-" + mo.bgpos.y + "px");
+            $(el + ' figure').css('background-position', '-' + mo.bgpos.x + 'px ' + '-' + mo.bgpos.y + 'px');
             $(el).data('info', mo.info);
 
             this.morphs.push({
@@ -135,7 +134,7 @@ var Level = Class.extend({
             $('#morphs > span').addClass('flash');
             a.addClass('flash');
             window.setTimeout(function() {
-                $('#morphs > span').removeClass("flash");
+                $('#morphs > span').removeClass('flash');
                 a.removeClass('flash');
             }, 1000);
         }
@@ -165,7 +164,7 @@ var Level = Class.extend({
     },
 
     morph: function(other) {
-        if (typeof(other) == "string") other = Object.$get(Entities, other);
+        if (typeof(other) === 'string') other = Object.$get(Entities, other);
 
         if (!this.player.initMorph()) return false;
 
@@ -227,25 +226,25 @@ var Level = Class.extend({
     },
 
     initRegion: function(region) {
-        if (region.name == "Spawn") {
+        if (region.name === 'Spawn') {
             this.spawn.x = region.x;
             this.spawn.y = region.y;
         }
     },
 
     initEntities: function() {
-        var named = {};
-        for (var i = 0; i < this.entities.length; i++) {
-            var ent = this.entities[i];
+        var named = {}, i, ent;
+        for (i = 0; i < this.entities.length; i++) {
+            ent = this.entities[i];
             if (ent._name) {
                 named[ent._name] = ent;
             }
         }
 
-        for (var i = 0; i < this.entities.length; i++) {
-            var ent = this.entities[i];
+        for (i = 0; i < this.entities.length; i++) {
+            ent = this.entities[i];
             if (ent._target) {
-                var _targets = ent._target.split(",");
+                var _targets = ent._target.split(',');
                 var targets = [];
 
                 for (var n = 0; n < _targets.length; n++) {
@@ -259,28 +258,28 @@ var Level = Class.extend({
     },
 
     initLayer: function(layer) {
-        if (layer.type === "tilelayer") {
-            if (layer.properties.type === "perspective") {
+        if (layer.type === 'tilelayer') {
+            if (layer.properties.type === 'perspective') {
                 this.layers.push(new PerspectiveLayer(layer, this.width, this.height, this.tilewidth, this.tileheight));
             }
-        } else if (layer.type === "objectgroup") {
-            if (layer.properties.type === "collision") {
+        } else if (layer.type === 'objectgroup') {
+            if (layer.properties.type === 'collision') {
                 this.layers.push(new CollisionLayer(layer));
             }
-            if (layer.properties.type === "image") {
+            if (layer.properties.type === 'image') {
                 this.layers.push(new ImageLayer(layer));
             }
-            if (layer.properties.type === "entity") {
+            if (layer.properties.type === 'entity') {
                 for (var i = 0; i < layer.data.length; i++) {
                     var ent = layer.data[i];
                     var e = Object.$get(Entities, ent.name);
-                    if (e && ent.type !== "region") {
+                    if (e && ent.type !== 'region') {
                         var o = {};
                         if (ent.properties && ent.properties.target || ent.properties.name) {
                             o._target = ent.properties.target;
                             o._name = ent.properties.name;
                         }
-                        var e = new e(ent.x, ent.y, ent);
+                        e = new e(ent.x, ent.y, ent);
                         Object.$merge(e, o);
                         this.entities.push(e);
                     } else {
@@ -299,7 +298,7 @@ var Level = Class.extend({
     update: function(game) {
         var i;
         for (i = 1; i < 7; i++) {
-            if (Input.isPressed(Keys["_" + i]) || Input.isPressed(Keys["NUMPAD_" + i])) {
+            if (Input.isPressed(Keys['_' + i]) || Input.isPressed(Keys['NUMPAD_' + i])) {
                 this.setActiveMorph(i - 1);
             }
         }
@@ -328,7 +327,8 @@ var Level = Class.extend({
     },
 
     draw: function(ctx) {
-        for (var i = 0; i < this.layers.length; i++) {
+        var i;
+        for (i = 0; i < this.layers.length; i++) {
             if (!this.layers[i].foreground) this.layers[i].draw(ctx, this.stats);
         }
 
@@ -342,11 +342,11 @@ var Level = Class.extend({
             return 0;
         });
 
-        for (var i = 0; i < this.entities.length; i++) {
+        for (i = 0; i < this.entities.length; i++) {
             this.entities[i].draw(ctx);
         }
 
-        for (var i = 0; i < this.layers.length; i++) {
+        for (i = 0; i < this.layers.length; i++) {
             if (this.layers[i].foreground) this.layers[i].draw(ctx, this.stats);
         }
     }

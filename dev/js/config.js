@@ -58,7 +58,7 @@ var Config = {
         shake: {
             x: 0,
             y: 0
-        }, 
+        },
 
         fullscreen: false,
 

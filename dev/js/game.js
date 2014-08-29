@@ -35,12 +35,12 @@ var Game = Class.extend({
     bgMusic: true,
 
     init: function(context) {
-        Input.bind("right", [Keys.D, Keys.RIGHT_ARROW]);
-        Input.bind("left", [Keys.Q, Keys.A, Keys.LEFT_ARROW]);
-        Input.bind("up", [Keys.Z, Keys.SPACE, Keys.UP_ARROW, Keys.W]);
-        Input.bind("down", [Keys.S, Keys.DOWN_ARROW]);
-        Input.bind("morph", [Keys.E, Keys.ENTER]);
-        Input.bind("restart", [Keys.R]);
+        Input.bind('right', [Keys.D, Keys.RIGHT_ARROW]);
+        Input.bind('left', [Keys.Q, Keys.A, Keys.LEFT_ARROW]);
+        Input.bind('up', [Keys.Z, Keys.SPACE, Keys.UP_ARROW, Keys.W]);
+        Input.bind('down', [Keys.S, Keys.DOWN_ARROW]);
+        Input.bind('morph', [Keys.E, Keys.ENTER]);
+        Input.bind('restart', [Keys.R]);
 
 
         $('#ui').fadeIn(1000);
@@ -62,7 +62,7 @@ var Game = Class.extend({
         });
 
         $('.mute').click(function() {
-            var a = $(this)
+            var a = $(this);
             a.toggleClass('muted');
             self.soundMuted = a.hasClass('muted');
         });
@@ -118,7 +118,7 @@ var Game = Class.extend({
         $('.restart').click(function() {
             showLevels(false);
             $('#morphs').fadeOut(500);
-            $('#canvas').fadeTo(300, .05, function() {
+            $('#canvas').fadeTo(300, 0.05, function() {
                 self.restartLevel();
                 showGame();
             });
@@ -136,18 +136,18 @@ var Game = Class.extend({
             self.pauseGame(true);
         });
 
-        $('#morphs > div').on('click', 'div', function(e) {
+        $('#morphs > div').on('click', 'div', function() {
             self.level.setActiveMorph($(this).attr('id') - 1);
         });
 
-        $('#morphs > div').on('mouseover', 'div', function(e) {
+        $('#morphs > div').on('mouseover', 'div', function() {
             var info = $(this).data('info');
-            if (!info) info = "Empty";
+            if (!info) info = 'Empty';
 
             $('#morphs > span').text(info);
         });
 
-        $('#morphs > div').on('mouseout', 'div', function(e) {
+        $('#morphs > div').on('mouseout', 'div', function() {
             var info = self.level.morphs[self.level.activemorph];
             info = (info && info.count > 0) ? info.info : 'Empty';
             $('#morphs > span').text(info);
@@ -179,7 +179,7 @@ var Game = Class.extend({
 
 
         function showGame(show, paused) {
-            if (show == undefined || show) {
+            if (show === undefined || show) {
                 $('#leveltitle').fadeIn();
                 $('#icons-top .left').fadeIn();
                 $('#canvas').fadeTo(300, 1);
@@ -292,11 +292,11 @@ var Game = Class.extend({
 
     playSound: function(sound, onlyOneInstance, options) {
         if (this.soundMuted) return;
-        if (typeof(sound) === "string") {
+        if (typeof(sound) === 'string') {
             sound = Object.$get(Assets.Sounds, sound);
         }
 
-        if (typeof(onlyOneInstance) === "object") {
+        if (typeof(onlyOneInstance) === 'object') {
             options = onlyOneInstance;
             onlyOneInstance = false;
         }
@@ -309,7 +309,7 @@ var Game = Class.extend({
     },
 
     pauseGame: function(paused) {
-        if (paused == undefined) paused = true;
+        if (paused === undefined) paused = true;
         this.paused = paused;
         p.setPaused(paused);
 
@@ -340,7 +340,7 @@ var Game = Class.extend({
         a = this.showMessage('Level Complete!', '#99FC87', 1500, {
             top: config.message.top - b,
             color: jQuery.Color('#FBCF95'),
-            el: "#ui"
+            el: '#ui'
         }, true, function() {
             var h = a.height();
 
@@ -402,9 +402,9 @@ var Game = Class.extend({
         this.currentLevelData = level;
         this.currentLevelId = id;
 
-        var s = "";
+        var s = '';
         if (!isNaN(id)) {
-            s = (parseInt(id) + 1) + ". ";
+            s = (parseInt(id) + 1) + '. ';
         }
         $('#leveltitle').text(s + level.title);
 
@@ -421,7 +421,7 @@ var Game = Class.extend({
         if (Input.isPressed('restart')) {
             var self = this;
             $('#morphs').fadeOut(500);
-            $('#canvas').fadeTo(300, .05, function() {
+            $('#canvas').fadeTo(300, 0.05, function() {
                 self.restartLevel();
                 $('#icons-top .left').fadeIn();
                 $('#canvas').fadeTo(300, 1);

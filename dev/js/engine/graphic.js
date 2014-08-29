@@ -118,36 +118,42 @@ var Graphic = Class.extend({
             return img;
         }
 
+        var sCanvas, sCtx, 
+            sData, dw, dh, 
+            dImgData, dData, 
+            src_p, dst_p,
+            y, i, x, j, tmp; 
+
         scale = this.applyScale(scale);
 
-        var sCanvas = document.createElement('canvas');
+        sCanvas = document.createElement('canvas');
         sCanvas.width = img.width;
         sCanvas.height = img.height;
 
-        var sCtx = sCanvas.getContext('2d');
+        sCtx = sCanvas.getContext('2d');
         sCtx.drawImage(img, 0, 0);
-        var sData = sCtx.getImageData(0, 0, img.width, img.height).data;
+        sData = sCtx.getImageData(0, 0, img.width, img.height).data;
 
-        var dw = img.width * scale;
-        var dh = img.height * scale;
+        dw = img.width * scale;
+        dh = img.height * scale;
 
-        var dCanvas = document.createElement('canvas');
+        dCanvas = document.createElement('canvas');
         dCanvas.width = dw;
         dCanvas.height = dh;
 
-        var dCtx = dCanvas.getContext('2d');
+        dCtx = dCanvas.getContext('2d');
 
-        var dImgData = dCtx.getImageData(0, 0, dw, dh);
-        var dData = dImgData.data;
+        dImgData = dCtx.getImageData(0, 0, dw, dh);
+        dData = dImgData.data;
 
-        var src_p = 0;
-        var dst_p = 0;
-        for (var y = 0; y < this.height; ++y) {
-            for (var i = 0; i < scale; ++i) {
-                for (var x = 0; x < this.width; ++x) {
+        src_p = 0;
+        dst_p = 0;
+        for (y = 0; y < this.height; ++y) {
+            for (i = 0; i < scale; ++i) {
+                for (x = 0; x < this.width; ++x) {
                     src_p = 4 * (y * this.width + x);
-                    for (var j = 0; j < scale; ++j) {
-                        var tmp = src_p;
+                    for (j = 0; j < scale; ++j) {
+                        tmp = src_p;
                         dData[dst_p++] = sData[tmp++];
                         dData[dst_p++] = sData[tmp++];
                         dData[dst_p++] = sData[tmp++];
