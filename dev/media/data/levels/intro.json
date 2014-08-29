@@ -135,7 +135,7 @@
  "orientation":"orthogonal",
  "properties":
     {
-
+        "noRestart": true
     },
  "tileheight":15,
  "tilesets":[

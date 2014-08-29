@@ -69,6 +69,9 @@ var Level = Class.extend({
         this.initEntities();
 
 
+        this.noRestart = data.properties && data.properties.noRestart;
+
+
         this.player = new Entities.Player(this.spawn.x, this.spawn.y);
         this.entities.push(this.player);
 

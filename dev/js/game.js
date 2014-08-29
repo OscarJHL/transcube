@@ -419,14 +419,16 @@ var Game = Class.extend({
 
     update: function() {
         if (Input.isPressed('restart')) {
-            var self = this;
-            $('#morphs').fadeOut(500);
-            $('#canvas').fadeTo(300, 0.05, function() {
-                self.restartLevel();
-                $('#icons-top .left').fadeIn();
-                $('#canvas').fadeTo(300, 1);
-                if (self.currentLevelId != '0') $('#morphs').delay(400).fadeIn();
-            });
+            if(!(this.level && this.level.noRestart)) {
+                var self = this;
+                $('#morphs').fadeOut(500);
+                $('#canvas').fadeTo(300, 0.05, function() {
+                    self.restartLevel();
+                    $('#icons-top .left').fadeIn();
+                    $('#canvas').fadeTo(300, 1);
+                    if (self.currentLevelId != '0') $('#morphs').delay(400).fadeIn();
+                });
+            }
         }
 
         if (config.debug && Input.isPressed(Keys.P)) {
